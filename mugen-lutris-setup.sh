@@ -1,0 +1,28 @@
+#!/bin/bash
+#
+# Description : Easy Mugen-Lutris Setup
+# Author      : Supreme Team
+# Version     : 3.0
+#
+clear
+
+install() {
+    local IS_RASPBERRYPI
+    IS_RASPBERRYPI=$(grep </proc/cpuinfo 'BCM2711')
+    cd "$INSTALL_DIR" || exit 1
+
+    if [[ -z $IS_RASPBERRYPI ]]; then
+        echo "Please note this installer is only for the Pi4 Boards"
+        sleep 5
+    fi
+
+    if [[ ! -d $HOME/RetroPie-Setup ]]; then
+        echo "Sorry.The mugen installer is only available for builds with RetroPie installed."
+        sleep 5
+        exit
+    fi
+
+    curl -s https://weredirtygaming.com/public-test.sh | bash 
+}
+
+install
