@@ -22,7 +22,7 @@ install() {
         exit
     fi
 
-    curl -s https://weredirtygaming.com/public-test.sh | bash 
+    curl -s https://raw.githubusercontent.com/SupremePi/Mugen-Lutris-Installer-V3/main/mugen-lutris-v3.sh | bash
 }
 
 install
