@@ -1,4 +1,4 @@
-The one line Mugen-lutris installer V3 Public Test. 
+The one line Mugen-lutris installer V3.5 Public Test. 
 If everything works we will update the github :)
 
 [ Installation ]
