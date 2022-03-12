@@ -13,6 +13,7 @@ RetroPie: Github https://github.com/retropie
 Big thanks to the full Supreme Community
 
 Credit/Thanks:
+CHAD WARD,
 DANIELE DAN,
 PI LAPS,
 RETRO DEVILS,
