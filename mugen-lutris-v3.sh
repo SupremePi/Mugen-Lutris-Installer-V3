@@ -51,7 +51,6 @@ function gui_mugen() {
             9 "Remove All Mugen Mesa-Vulkan Box86-Wine" \
         )
 
-
         local choice=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
         if [[ -n "$choice" ]]; then
             case "$choice" in
@@ -92,7 +91,6 @@ function gui_mugen() {
     done
 }
 
-
 mugen_update_check() { 
 update_check
 mugen_check
@@ -131,9 +129,7 @@ box86-wine-desktop
 box86-wine-roms
 }
 
-
 update_check() { 
-
 echo -e "$(tput setaf 2)
 ***Please note you selected the full update, This could take up to 40 mins*** 
 $(tput sgr0)"
@@ -210,8 +206,8 @@ sleep 3
 clear
 }
 
+#Removes main files if found.
 clean_check() { 
-#Remove if found.
 sudo rm -r /opt/retropie/ports/wine 2>/dev/null
 sudo rm -r /opt/retropie/emulators/box86 2>/dev/null
 sudo rm -r /opt/retropie/emulators/wine 2>/dev/null
@@ -249,7 +245,6 @@ clear
 
 sudo reboot
 } 
-
 
 mesa-vulkan-installer() {
 
@@ -869,7 +864,7 @@ sudo rm /home/pi/RetroPie/roms/wine/games/Mugen/sprmake2.exe  2>/dev/null
 sudo rm /home/pi/RetroPie/roms/wine/games/Mugen/sff2png.exe  2>/dev/null
 sudo rm /home/pi/RetroPie/roms/wine/games/Mugen/sndmaker.exe  2>/dev/null
 
-curl -s https://raw.githubusercontent.com/Retro-Devils/Mugen-Pi-4/main/Mugen.cfg -o /home/pi/RetroPie/roms/wine/games/Mugen/data/mugen.cfg
+curl -s https://raw.githubusercontent.com/SupremePi/Mugen-Lutris-Installer-V3/main/Mugen.cfg -o /home/pi/RetroPie/roms/wine/games/Mugen/data/mugen.cfg
 sudo chmod +x /home/pi/RetroPie/roms/wine/games/Mugen/data/mugen.cfg
 
 echo -e "$(tput setaf 2)
@@ -1040,7 +1035,6 @@ uninstall_lutris() {
 }
 
 lutris_check() {
-
 if [ -d /opt/retropie/ports/lutris ]; then
 echo -e "Lutris already installed.\n"
 uninstall_lutris
@@ -1051,7 +1045,6 @@ echo -e "$(tput setaf 2)
 Now Installing Lutris To Your PI 4!
 $(tput sgr0)"
 sleep 3
-
 
 #will add if missing
 echo "deb http://download.opensuse.org/repositories/home:/strycore/Debian_10/ ./" | sudo tee /etc/apt/sources.list.d/lutris.list
