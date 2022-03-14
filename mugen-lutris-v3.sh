@@ -889,7 +889,7 @@ sudo rm /home/pi/RetroPie/roms/wine/games/Mugen/sprmake2.exe  2>/dev/null
 sudo rm /home/pi/RetroPie/roms/wine/games/Mugen/sff2png.exe  2>/dev/null
 sudo rm /home/pi/RetroPie/roms/wine/games/Mugen/sndmaker.exe  2>/dev/null
 
-curl -s https://github.com/ALLRiPPED/Mugen-Lutris-Installer-V3/raw/main/Mugen.cfg -o /home/pi/RetroPie/roms/wine/games/Mugen/data/mugen.cfg
+curl -s https://raw.githubusercontent.com/SupremePi/Mugen-Lutris-Installer-V3/main/Mugen.cfg -o /home/pi/RetroPie/roms/wine/games/Mugen/data/mugen.cfg
 sudo chmod +x /home/pi/RetroPie/roms/wine/games/Mugen/data/mugen.cfg
 
 echo -e "$(tput setaf 2)
