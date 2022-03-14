@@ -868,7 +868,6 @@ sudo mv /home/pi/wine_desktop /usr/bin/wine_desktop
 sudo chmod +x /usr/bin/wine_desktop
 }
 
-
 install_mugen() {
     if [[ ! -d /home/pi/RetroPie/roms/wine/games ]]; then
         mkdir /home/pi/RetroPie/roms/wine/games
@@ -973,7 +972,6 @@ Joystick 2 {
 }
 EOF22
 
-
 cat <<\EOF33 > "/home/pi/.qjoypad3/mugen.lyt"
 # QJoyPad 4.1 Layout File
 
@@ -990,7 +988,6 @@ Joystick 1 {
 	Button 10: key 36
 }
 EOF33
-
 
 cat <<\EOF44 > "/home/pi/.qjoypad3/Baldurs_Gate.lyt"
 # QJoyPad 4.1 Layout File
