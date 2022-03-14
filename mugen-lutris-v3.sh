@@ -1215,8 +1215,9 @@ sudo bash -c 'cat << EOF > /usr/bin/version-mugen
 Supreme Team & Retro-Devils
 Mugen & Lutris V3.5
 EOF'
-sudo chmod +x /usr/bin/switcheroo
+sudo chmod +x /usr/bin/version-mugen
 fi
+
 setup_start
 }
 
