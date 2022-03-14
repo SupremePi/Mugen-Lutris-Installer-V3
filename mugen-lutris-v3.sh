@@ -1206,13 +1206,16 @@ fi
 }
 
 installed_version() {
+if [ -f /usr/bin/version-mugen ]; then
+sudo rm /usr/bin/version-mugen
+fi
+
 if [ ! -f /usr/bin/version-mugen ]; then
-sudo cat <<\EOF8954 > "/home/pi/version-mugen"
+sudo bash -c 'cat << EOF > /usr/bin/version-mugen
 Supreme Team & Retro-Devils
 Mugen & Lutris V3.5
-EOF8954
-sudo mv /home/pi/version-mugen /usr/bin/version-mugen
-sudo chmod +x /usr/bin/version-mugen
+EOF'
+sudo chmod +x /usr/bin/switcheroo
 fi
 setup_start
 }
