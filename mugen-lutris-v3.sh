@@ -51,6 +51,7 @@ function gui_mugen() {
             9 "Remove All Mugen Mesa-Vulkan Box86-Wine" \
         )
 
+
         local choice=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
         if [[ -n "$choice" ]]; then
             case "$choice" in
@@ -78,9 +79,9 @@ function gui_mugen() {
                 8)
                     box86_wine_check
                     ;;
-		9)
+                9)
                     clean_check
-		    ;;
+					;;
                 -)
                     none
                     ;;
@@ -90,6 +91,7 @@ function gui_mugen() {
         fi
     done
 }
+
 
 mugen_update_check() { 
 update_check
@@ -114,6 +116,7 @@ box86-wine-shortcuts
 box86-wine-es
 box86-wine-desktop
 box86-wine-roms
+box86-wine-mono-gecko
 }
 
 mesa_vulkan_check() { 
@@ -127,9 +130,12 @@ box86-wine-shortcuts
 box86-wine-es
 box86-wine-desktop
 box86-wine-roms
+box86-wine-mono-gecko
 }
 
+
 update_check() { 
+
 echo -e "$(tput setaf 2)
 ***Please note you selected the full update, This could take up to 40 mins*** 
 $(tput sgr0)"
@@ -206,8 +212,8 @@ sleep 3
 clear
 }
 
-#Removes main files if found.
 clean_check() { 
+#Remove if found.
 sudo rm -r /opt/retropie/ports/wine 2>/dev/null
 sudo rm -r /opt/retropie/emulators/box86 2>/dev/null
 sudo rm -r /opt/retropie/emulators/wine 2>/dev/null
@@ -216,6 +222,15 @@ sudo rm -r /opt/retropie/configs/ports/wine* 2>/dev/null
 sudo rm -r /home/pi/.wine 2>/dev/null
 sudo rm -r /home/pi/box86 2>/dev/null
 sudo rm -r /home/pi/wine 2>/dev/null
+sudo rm -f /usr/local/bin/box86 2>/dev/null
+sudo rm -f /usr/local/bin/wine 2>/dev/null
+sudo rm -f /usr/local/bin/wineboot 2>/dev/null
+sudo rm -f /usr/local/bin/winecfg 2>/dev/null
+sudo rm -f /usr/local/bin/wineserver 2>/dev/null
+sudo rm -f /usr/local/bin/winetricks 2>/dev/null
+sudo rm -f /usr/bin/wine_desktop 2>/dev/null
+sudo rm -f /usr/bin/version-mugen 2>/dev/null
+sudo rm -f /usr/share/bash-completion/completions/wine 2>/dev/null
 sudo rm -r /home/pi/RetroPie/roms/wine 2>/dev/null
 sudo rm -r /home/pi/RetroPie/roms/ports/wine 2>/dev/null
 sudo rm -r /home/pi/RetroPie/roms/ports/Mugen 2>/dev/null
@@ -236,7 +251,7 @@ box86-wine-desktop
 box86-wine-roms
 install_mugen
 setup_controller
-
+box86-wine-mono-gecko
 echo -e "$(tput setaf 2)
 Now Rebooting to save changes, please wait...
 $(tput sgr0)"
@@ -245,6 +260,7 @@ clear
 
 sudo reboot
 } 
+
 
 mesa-vulkan-installer() {
 
@@ -510,8 +526,6 @@ install_winex86() {
     sudo chown pi:pi /home/pi/wine/bin/winetricks
     sudo chown pi:pi /usr/local/bin/winetricks
     generate_icon_winetricks
-
-    #wine wineboot
 }
 
 is_kernel_64_bits() {
@@ -575,6 +589,7 @@ install() {
     compile_box86
     echo -e "\nInstalling Wine x86..."
     install_winex86
+
 echo -e "$(tput setaf 2)
 Done!
 $(tput sgr0)"
@@ -681,6 +696,16 @@ cat <<\EOF100 > "/home/pi/Desktop/Update-wine-configs.sh"
 wine wineboot
 EOF100
 sudo chmod +x /home/pi/Desktop/Update-wine-configs.sh
+}
+
+box86-wine-mono-gecko() {
+    wine wineboot
+    cd "$HOME" || exit
+    wget https://dl.winehq.org/wine/wine-mono/5.1.1/wine-mono-5.1.1-x86.msi
+    wget https://dl.winehq.org/wine/wine-gecko/2.47.2/wine-gecko-2.47.2-x86.msi
+    wine msiexec /i ~/wine-mono-5.1.1-x86.msi /quiet /qn /norestart PROPERTY1=value1 PROPERTY2=value2
+    wine msiexec /i ~/wine-gecko-2.47.2-x86.msi /quiet /qn /norestart PROPERTY1=value1 PROPERTY2=value2
+    rm -f wine-mono-5.1.1-x86.msi wine-gecko-2.47.2-x86.msi
 }
 
 box86-wine-roms() {
@@ -864,7 +889,7 @@ sudo rm /home/pi/RetroPie/roms/wine/games/Mugen/sprmake2.exe  2>/dev/null
 sudo rm /home/pi/RetroPie/roms/wine/games/Mugen/sff2png.exe  2>/dev/null
 sudo rm /home/pi/RetroPie/roms/wine/games/Mugen/sndmaker.exe  2>/dev/null
 
-curl -s https://raw.githubusercontent.com/SupremePi/Mugen-Lutris-Installer-V3/main/Mugen.cfg -o /home/pi/RetroPie/roms/wine/games/Mugen/data/mugen.cfg
+curl -s https://github.com/ALLRiPPED/Mugen-Lutris-Installer-V3/raw/main/Mugen.cfg -o /home/pi/RetroPie/roms/wine/games/Mugen/data/mugen.cfg
 sudo chmod +x /home/pi/RetroPie/roms/wine/games/Mugen/data/mugen.cfg
 
 echo -e "$(tput setaf 2)
@@ -1035,6 +1060,7 @@ uninstall_lutris() {
 }
 
 lutris_check() {
+
 if [ -d /opt/retropie/ports/lutris ]; then
 echo -e "Lutris already installed.\n"
 uninstall_lutris
@@ -1045,6 +1071,7 @@ echo -e "$(tput setaf 2)
 Now Installing Lutris To Your PI 4!
 $(tput sgr0)"
 sleep 3
+
 
 #will add if missing
 echo "deb http://download.opensuse.org/repositories/home:/strycore/Debian_10/ ./" | sudo tee /etc/apt/sources.list.d/lutris.list
